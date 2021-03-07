@@ -1,0 +1,16 @@
+.headerContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;  
+
+  margin-bottom: 2rem;
+}
+
+.headerContainer > img {
+  width: 12rem;
+}
+
+.headerContainer nav ul {
+  display: flex;
+  gap: .9rem;
+}
