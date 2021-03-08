@@ -1,0 +1,32 @@
+.postCardContainer {
+  width: 100%;
+  max-width: 20rem;
+
+  padding: .7rem;
+
+  border-radius: 8px;
+
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+.postCardContainer img {
+  width: 100%;
+
+  border-radius: 8px;
+}
+
+.postCardContainer h2 {
+  margin: 0;
+
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.postCardContainer p {
+  margin: 0;
+
+  font-size: .8rem;
+  word-break: break-all;
+
+  opacity: .8;
+}
