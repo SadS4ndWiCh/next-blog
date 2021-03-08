@@ -1,18 +1,40 @@
-.postCardContainer {
+.postCardContainer > a {
+  display: flex;
+  align-items: center;
+  gap: .9rem;
+
   width: 100%;
-  max-width: 20rem;
+  max-height: 10rem;
 
   padding: .7rem;
 
   border-radius: 8px;
 
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  transition: box-shadow .2s, transform .2s;
+}
+
+.postCardContainer > a:hover {
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.25);
+  
+  text-decoration: none;
+
+  transform: translateY(-5px);
+  cursor: pointer;
 }
 
 .postCardContainer img {
-  width: 100%;
+  width: 225px;
 
   border-radius: 8px;
+}
+
+.postCardContainer a > div {
+  display: flex;
+  flex-direction: column;
+  align-content: flex-start;
+
+  margin-bottom: auto;
 }
 
 .postCardContainer h2 {
@@ -25,6 +47,7 @@
 .postCardContainer p {
   margin: 0;
 
+  text-decoration: none;
   font-size: .8rem;
   word-break: break-all;
 
