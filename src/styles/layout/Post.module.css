@@ -1,0 +1,30 @@
+.postContent p {
+  display: flex;
+  flex-direction: column;
+}
+
+.postContainer header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.postContainer header img {
+  width: 50rem
+}
+
+.postContainer header h1 {
+  font-weight: 600;
+  font-size: 3rem;
+}
+
+.postContent {
+  font-size: 1.3rem;
+  line-height: 2.3rem;
+}
+
+.postContent img {
+  width: 90%;
+  
+  align-self: center;
+}
