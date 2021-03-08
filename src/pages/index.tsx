@@ -1,50 +1,54 @@
 import DefaultLayout from '@layouts/default';
 import Link from '@components/Link';
+import PostCard from '@components/PostCard'
 
-import { getConfig, getAllPosts } from '@api';
+import { getAllPosts, getPostsSlugs } from 'src/lib';
 import { GetStaticProps } from 'next';
 
 import styles from '../styles/pages/Home.module.css';
 
 interface Post {
-  slug: string;
-  title: string;
+  slug?: string;
+  title?: string;
+  date?: string;
+  thumbnail?: string;
+  content?: string;
+  excerpt?: string;
 }
 
 interface HomePageProps {
   posts: Post[];
-  title: string;
-  description: string;
 }
 
-export default function Home({ posts, title, description }: HomePageProps) {
+export default function Home({ posts }: HomePageProps) {
   return (
     <div className={styles.container}>
-      <DefaultLayout title={title} description={description}>
-        <p>List of posts</p>
-        <ul>
+      <DefaultLayout>
+        <h1>Posts</h1>
+        
+        <main>
           { posts.map((post, i) => (
-            <li key={i}>
-              <Link to={`/posts/${post.slug}`}>
-                {post.title}
-              </Link>
-            </li>
+            <PostCard
+              key={i}
+              title={post.title}
+              excerpt={post.excerpt}
+              slug={post.slug}
+              date={post.date}
+              thumbnail={post.thumbnail}
+            />
           ))}
-        </ul>
+        </main>
       </DefaultLayout>
     </div>
   )
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const config = await getConfig();
-  const allPosts = await getAllPosts();
+  const posts = getAllPosts(['slug', 'date', 'excerpt', 'title', 'thumbnail']);
 
   return {
     props: {
-      posts: allPosts,
-      title: config.title,
-      description: config.description,
+      posts
     }
   }
 }
