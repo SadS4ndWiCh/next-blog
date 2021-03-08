@@ -21,7 +21,9 @@ export default function DefaultLayout({ children, title, description }: DefaultL
       </Head>
       
       <Header />
+      <section className={styles.content}>
         { children }
+      </section>
       <Footer />
     </div>
   )
