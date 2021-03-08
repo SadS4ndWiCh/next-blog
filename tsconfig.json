@@ -23,7 +23,7 @@
       "@posts/*": ["src/_posts/*"],
       "@components/*": ["src/components/*"],
       "@styles/*": ["src/styles/*"],
-      "@api": ["src/api/index"],
+      "@lib/*": ["src/lib/*"],
     }
   },
   "include": [
