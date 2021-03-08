@@ -1,18 +1,26 @@
 import PostLayout from '@layouts/post';
-import { getPostBySlug, getAllPosts } from '@api';
+import { getPostBySlug, getPostsSlugs } from '@lib/index';
 import { GetStaticPaths, GetStaticProps } from 'next';
 
 import styles from '../../styles/pages/Post.module.css';
 
 interface PostPageProps {
-  title: string;
-  content: string;
+  title?: string;
+  date?: string;
+  thumbnail?: string;
+  content?: string;
+  excerpt?: string;
+  slug?: string;
 }
 
-export default function Post({ title, content }: PostPageProps) {
+export default function Post({ title, content, thumbnail }: PostPageProps) {
   return (
     <div className={`${styles.postContainer} container`}>
-      <PostLayout title={title} content={content} />
+      <PostLayout
+        title={title}
+        content={content}
+        thumbnail={thumbnail}
+      />
     </div>
   )
 }
@@ -21,15 +29,15 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
   const slug = ctx.params.slug as string;
   
   return {
-    props: await getPostBySlug(slug),
+    props: getPostBySlug(slug, ['title', 'content', 'thumbnail']),
   }
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  let paths = await getAllPosts();
+  let paths = getPostsSlugs();
   paths = paths.map(post => ({
-    params: { slug: post.slug }
-  }));
+    params: { slug: post.replace(/\.md$/, '') }
+  })) as any;
 
   return {
     paths,
