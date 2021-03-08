@@ -14,13 +14,16 @@ interface PostCardProps {
 export default function PostCard({ title, excerpt, date, slug, thumbnail }: PostCardProps) {
   return (
     <div className={styles.postCardContainer}>
-      { thumbnail && (
-        <img src={thumbnail} alt={title}/>
-      ) }
       <Link to={`/posts/${slug}`}>
-        <h2>{title}</h2>
+        { thumbnail && (
+          <img src={thumbnail} alt={title}/>
+        ) }
+        <div>
+          <h2>{title}</h2>
+          
+          <p>{excerpt}</p>
+        </div>
       </Link>
-      <p>{excerpt}</p>
     </div>
   )
 }
