@@ -11,8 +11,8 @@
 }
 
 .container main {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(auto, 20rem));
+  display: flex;
+  flex-direction: column;
 
   gap: .9rem;
 }
