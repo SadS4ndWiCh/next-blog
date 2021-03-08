@@ -1,0 +1,5 @@
+.defaultLayoutContainer {
+  display: flex;
+  flex-direction: column;
+
+}
