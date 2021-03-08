@@ -14,7 +14,7 @@ interface DefaultLayoutProps {
 
 export default function DefaultLayout({ children, title, description }: DefaultLayoutProps) {
   return (
-    <main>
+    <div className={styles.defaultLayoutContainer}>
       <Head>
         <title>{ title }</title>
         <meta name="description" content={ description } />
@@ -23,6 +23,6 @@ export default function DefaultLayout({ children, title, description }: DefaultL
       <Header />
         { children }
       <Footer />
-    </main>
+    </div>
   )
 }
