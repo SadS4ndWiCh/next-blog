@@ -13,4 +13,8 @@
 .headerContainer nav ul {
   display: flex;
   gap: .9rem;
+
+  list-style: none;
+
+  font-weight: 600;
 }
