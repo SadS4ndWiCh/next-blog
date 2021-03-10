@@ -15,8 +15,6 @@ interface PostPageProps {
 }
 
 export default function Post({ post }: PostPageProps) {
-  console.log(post.data.content);
-
   return (
     <div className={`${styles.postContainer} container`}>
       <PostLayout

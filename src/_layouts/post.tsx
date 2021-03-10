@@ -13,8 +13,6 @@ interface PostLayoutProps {
 }
 
 export default function PostLayout({ title, content, thumbnail }: PostLayoutProps) {
-  console.log(content);
-
   return (
     <DefaultLayout>
       <Head>
