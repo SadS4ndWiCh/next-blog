@@ -3,14 +3,18 @@ import DefaultLayout from '@layouts/default';
 import Link from '@components/Link';
 
 import styles from '@styles/layout/Post.module.css';
+import { ReactNode } from 'react';
+import { RichText, RichTextBlock } from 'prismic-reactjs';
 
 interface PostLayoutProps {
   title: string;
-  content: string;
+  content: RichTextBlock[];
   thumbnail?: string;
 }
 
 export default function PostLayout({ title, content, thumbnail }: PostLayoutProps) {
+  console.log(content);
+
   return (
     <DefaultLayout>
       <Head>
@@ -25,10 +29,9 @@ export default function PostLayout({ title, content, thumbnail }: PostLayoutProp
           <h1>{ title }</h1>
         </header>
         
-        <div
-          className={styles.postContent}
-          dangerouslySetInnerHTML={{ __html: content }}
-        />
+        <main>
+          { RichText.render(content) }
+        </main>
       </article>
     </DefaultLayout>
   )
