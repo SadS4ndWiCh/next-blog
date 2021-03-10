@@ -1,3 +1,9 @@
+import Prismic from '@prismicio/client';
+import ApiSearchResponse from '@prismicio/client/types/ApiSearchResponse';
+import { RichText } from 'prismic-reactjs';
+import { Client } from '@utils/prismic-configuration';
+import formatDate from '@utils/formatDate';
+
 import DefaultLayout from '@layouts/default';
 import Link from '@components/Link';
 import PostCard from '@components/PostCard'
@@ -7,17 +13,8 @@ import { GetStaticProps } from 'next';
 
 import styles from '../styles/pages/Home.module.css';
 
-interface Post {
-  slug?: string;
-  title?: string;
-  date?: string;
-  thumbnail?: string;
-  content?: string;
-  excerpt?: string;
-}
-
 interface HomePageProps {
-  posts: Post[];
+  posts: ApiSearchResponse;
 }
 
 export default function Home({ posts }: HomePageProps) {
@@ -27,16 +24,16 @@ export default function Home({ posts }: HomePageProps) {
         <h1>Posts</h1>
         
         <main>
-          { posts.map((post, i) => (
+          { posts.results.map((post, i) => (
             <PostCard
               key={i}
-              title={post.title}
-              excerpt={post.excerpt}
-              slug={post.slug}
-              date={post.date}
-              thumbnail={post.thumbnail}
+              title={RichText.asText(post.data.title)}
+              excerpt={RichText.asText(post.data.excerpt)}
+              slug={post.uid}
+              date={post.data.formattedDate}
+              thumbnail={post.data.thumbnail.url}
             />
-          ))}
+          )) }
         </main>
       </DefaultLayout>
     </div>
@@ -44,7 +41,15 @@ export default function Home({ posts }: HomePageProps) {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const posts = getAllPosts(['slug', 'date', 'excerpt', 'title', 'thumbnail']);
+  const posts = await Client.query(
+    Prismic.Predicates.at('document.type', 'article')
+  );
+
+  posts.results.map(post => {
+    post.data.formattedDate = formatDate(post.data.published_at);
+  });
+
+  // const posts = getAllPosts(['slug', 'date', 'excerpt', 'title', 'thumbnail']);
 
   return {
     props: {
