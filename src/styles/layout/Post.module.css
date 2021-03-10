@@ -1,6 +1,14 @@
+.postContent {
+  max-width: 100%;
+}
+
 .postContent p {
   display: flex;
   flex-direction: column;
+}
+
+.postContainer main {
+  word-break: break-word;
 }
 
 .postContainer header {
